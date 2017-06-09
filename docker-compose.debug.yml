@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  strider:
+    environment:
+      - NODE_ENV=development
+      - DEBUG=true
+

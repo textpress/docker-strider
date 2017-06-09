@@ -1,0 +1,7 @@
+authtoken: 5A6eG1LCwSDjMFbiJGg5c_2cuuqtMB92XcLvCRQJBpE
+tunnels:
+  autobuild:
+    proto: http
+    addr: 80
+    inspect: false
+    bind_tls: true

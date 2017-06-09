@@ -1,0 +1,45 @@
+version: "3"
+
+volumes:
+  strider-data:
+
+services:
+  strider:
+    image: strider-app
+    container_name: strider-app
+    restart: always
+
+    environment:
+      - STRIDER_VERSION="latest"
+
+      - SERVER_NAME=https://autobuild.local
+      - PLUGIN_GITHUB_APP_ID=e13210e941750d5ed157
+      - PLUGIN_GITHUB_APP_SECRET=e0e22387b29b6e95d37b93e03c894b2ac19a1518
+
+      - NODE_ENV=production
+      - DEBUG=false
+
+      - DB_URI=mongodb://mongo:27017/strider
+#      - STRIDER_ADMIN_EMAIL=accounts@textpress.co
+#      - STRIDER_ADMIN_PASSWORD=texpress
+
+    build:
+      context: ./docker-image
+      args:
+        STRIDER_VERSION: latest
+        STRIDER_HOME: /data
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - strider-data:/data
+
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: strider-mongo
+    restart: always
+
